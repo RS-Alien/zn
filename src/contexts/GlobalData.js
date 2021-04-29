@@ -313,6 +313,7 @@ async function getGlobalData(ethPrice, oldEthPrice) {
     console.log(e)
   }
 
+  console.log("data is ",data)
   return data
 }
 

@@ -74,7 +74,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "scp -r build/* 119.28.186.224:/data/zooswap-info-dev"
   },
   "browserslist": {
     "production": [

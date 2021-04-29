@@ -4,7 +4,9 @@ import { HttpLink } from 'apollo-link-http'
 
 export const client = new ApolloClient({
   link: new HttpLink({
-    uri: 'https://api.thegraph.com/subgraphs/name/ianlapham/uniswapv2',
+    //uri: 'https://api.thegraph.com/subgraphs/name/ianlapham/uniswapv2',
+    //uri: 'http://dev-graph.zooswap.net/subgraphs/name/zooswap/oktest4',
+    uri: 'http://dev-graph.zooswap.net/subgraphs/name/zooswap/oktest4',
   }),
   cache: new InMemoryCache(),
   shouldBatch: true,
@@ -36,7 +38,8 @@ export const stakingClient = new ApolloClient({
 
 export const blockClient = new ApolloClient({
   link: new HttpLink({
-    uri: 'https://api.thegraph.com/subgraphs/name/blocklytics/ethereum-blocks',
+   // uri: 'http://dev-graph.zooswap.net/subgraphs/name/zooswap/okextest-blocks',
+    uri: 'https://testgraph.kswap.finance/subgraphs/name/blocklytics/ethereum-blocks',
   }),
   cache: new InMemoryCache(),
 })
