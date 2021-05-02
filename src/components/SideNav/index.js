@@ -10,8 +10,10 @@ import { withRouter } from 'react-router-dom'
 import { TrendingUp, List, PieChart, Disc } from 'react-feather'
 import Link from '../Link'
 import { useSessionStart } from '../../contexts/Application'
-import { useDarkModeManager } from '../../contexts/LocalStorage'
+import { useDarkModeManager, useLanguageModeManager } from '../../contexts/LocalStorage'
 import Toggle from '../Toggle'
+import ToggleLanguage from '../ToggleLanguage'
+import { useTranslation } from 'react-i18next'
 
 const Wrapper = styled.div`
   height: ${({ isMobile }) => (isMobile ? 'initial' : '100vh')};
@@ -99,6 +101,8 @@ const PollingDot = styled.div`
   background-color: ${({ theme }) => theme.green1};
 `
 
+
+
 function SideNav({ history }) {
   const below1080 = useMedia('(max-width: 1080px)')
 
@@ -106,7 +110,10 @@ function SideNav({ history }) {
 
   const seconds = useSessionStart()
 
+
+  const [lang, toggleLanguage] = useLanguageModeManager()
   const [isDark, toggleDarkMode] = useDarkModeManager()
+  const { t } = useTranslation();
 
   return (
     <Wrapper isMobile={below1080}>
@@ -119,7 +126,7 @@ function SideNav({ history }) {
                 <BasicLink to="/home">
                   <Option activeText={history.location.pathname === '/home' ?? undefined}>
                     <TrendingUp size={20} style={{ marginRight: '.75rem' }} />
-                    Overview
+                    {t('overview')}
                   </Option>
                 </BasicLink>
                 <BasicLink to="/tokens">
@@ -131,7 +138,7 @@ function SideNav({ history }) {
                     }
                   >
                     <Disc size={20} style={{ marginRight: '.75rem' }} />
-                    Tokens
+                    {t('tokens')}
                   </Option>
                 </BasicLink>
                 <BasicLink to="/pairs">
@@ -143,7 +150,7 @@ function SideNav({ history }) {
                     }
                   >
                     <PieChart size={20} style={{ marginRight: '.75rem' }} />
-                    Pairs
+                    {t('pairs')}
                   </Option>
                 </BasicLink>
 
@@ -156,7 +163,7 @@ function SideNav({ history }) {
                     }
                   >
                     <List size={20} style={{ marginRight: '.75rem' }} />
-                    Accounts
+                    {t('accounts')}
                   </Option>
                 </BasicLink>
               </AutoColumn>
@@ -188,6 +195,7 @@ function SideNav({ history }) {
                 Twitter
               </Link>
             </HeaderText>
+            <ToggleLanguage lang={lang} toggle={toggleLanguage} />
             <Toggle isActive={isDark} toggle={toggleDarkMode} />
           </AutoColumn>
           {!below1180 && (
@@ -195,7 +203,7 @@ function SideNav({ history }) {
               <PollingDot />
               <a href="/" style={{ color: 'white' }}>
                 <TYPE.small color={'white'}>
-                  Updated {!!seconds ? seconds + 's' : '-'} ago <br />
+                  {t('updated')} {!!seconds ? seconds + 's' : '-'} {t('ago')} <br />
                 </TYPE.small>
               </a>
             </Polling>

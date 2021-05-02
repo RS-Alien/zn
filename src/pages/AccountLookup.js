@@ -12,6 +12,7 @@ import LocalLoader from '../components/LocalLoader'
 import { RowBetween } from '../components/Row'
 import { useMedia } from 'react-use'
 import Search from '../components/Search'
+import { useTranslation } from 'react-i18next'
 
 const AccountWrapper = styled.div`
   @media screen and (max-width: 600px) {
@@ -28,19 +29,20 @@ function AccountLookup() {
   const topLps = useTopLps()
 
   const below600 = useMedia('(max-width: 600px)')
+  const { t } = useTranslation();
 
   return (
     <PageWrapper>
       <FullWrapper>
         <RowBetween>
-          <TYPE.largeHeader>Wallet analytics</TYPE.largeHeader>
+          <TYPE.largeHeader>{t('walletAnalytics')}</TYPE.largeHeader>
           {!below600 && <Search small={true} />}
         </RowBetween>
         <AccountWrapper>
           <AccountSearch />
         </AccountWrapper>
         <TYPE.main fontSize={'1.125rem'} style={{ marginTop: '2rem' }}>
-          Top Liquidity Positions
+          {t('topLiquidityPositions')}
         </TYPE.main>
         <Panel>{topLps && topLps.length > 0 ? <LPList lps={topLps} maxItems={200} /> : <LocalLoader />}</Panel>
       </FullWrapper>

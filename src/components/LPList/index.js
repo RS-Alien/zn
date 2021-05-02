@@ -13,6 +13,7 @@ import { formattedNum } from '../../utils'
 import { TYPE } from '../../Theme'
 import DoubleTokenLogo from '../DoubleLogo'
 import { RowFixed } from '../Row'
+import { useTranslation } from 'react-i18next'
 
 dayjs.extend(utc)
 
@@ -76,6 +77,7 @@ const DataText = styled(Flex)`
 `
 
 function LPList({ lps, disbaleLinks, maxItems = 10 }) {
+  const { t } = useTranslation();
   const below600 = useMedia('(max-width: 600px)')
   const below800 = useMedia('(max-width: 800px)')
 
@@ -152,7 +154,7 @@ function LPList({ lps, disbaleLinks, maxItems = 10 }) {
           </Flex>
         )}
         <Flex alignItems="center" justifyContent="flex-start">
-          <TYPE.main area="name">Account</TYPE.main>
+          <TYPE.main area="name">{t('account')}</TYPE.main>
         </Flex>
         {/* {!below1080 && (
           <Flex alignItems="center" justifyContent="flexEnd">
@@ -160,10 +162,10 @@ function LPList({ lps, disbaleLinks, maxItems = 10 }) {
           </Flex>
         )} */}
         <Flex alignItems="center" justifyContent="flexEnd">
-          <TYPE.main area="pair">Pair</TYPE.main>
+          <TYPE.main area="pair">{t('pair')}</TYPE.main>
         </Flex>
         <Flex alignItems="center" justifyContent="flexEnd">
-          <TYPE.main area="value">Value</TYPE.main>
+          <TYPE.main area="value">{t('value')}</TYPE.main>
         </Flex>
       </DashGrid>
       <Divider />
@@ -172,7 +174,7 @@ function LPList({ lps, disbaleLinks, maxItems = 10 }) {
         <div onClick={() => setPage(page === 1 ? page : page - 1)}>
           <Arrow faded={page === 1 ? true : false}>←</Arrow>
         </div>
-        <TYPE.body>{'Page ' + page + ' of ' + maxPage}</TYPE.body>
+        <TYPE.body>{t('page') + ' ' + page + ' ' + t('of') + ' ' + maxPage}</TYPE.body>
         <div onClick={() => setPage(page === maxPage ? page : page + 1)}>
           <Arrow faded={page === maxPage ? true : false}>→</Arrow>
         </div>

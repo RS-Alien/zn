@@ -12,7 +12,9 @@ const SAVED_PAIRS = 'SAVED_PAIRS'
 
 const DARK_MODE = 'DARK_MODE'
 
-const UPDATABLE_KEYS = [DARK_MODE, DISMISSED_PATHS, SAVED_ACCOUNTS, SAVED_PAIRS, SAVED_TOKENS]
+const LANGUAGE_KEY = 'LANGUAGE_KEY'
+
+const UPDATABLE_KEYS = [DARK_MODE, DISMISSED_PATHS, SAVED_ACCOUNTS, SAVED_PAIRS, SAVED_TOKENS, LANGUAGE_KEY]
 
 const UPDATE_KEY = 'UPDATE_KEY'
 
@@ -44,6 +46,7 @@ function reducer(state, { type, payload }) {
 function init() {
   const defaultLocalStorage = {
     [VERSION]: CURRENT_VERSION,
+    [LANGUAGE_KEY]: 'zh',
     [DARK_MODE]: true,
     [DISMISSED_PATHS]: {},
     [SAVED_ACCOUNTS]: [],
@@ -53,6 +56,8 @@ function init() {
 
   try {
     const parsed = JSON.parse(window.localStorage.getItem(UNISWAP))
+    // 解决 LocalStorage 过多引起页面抖动问题
+    parsed.LANGUAGE_KEY = window.localStorage.getItem(LANGUAGE_KEY);
     if (parsed[VERSION] !== CURRENT_VERSION) {
       // this is where we could run migration logic
       return defaultLocalStorage
@@ -98,6 +103,19 @@ export function useDarkModeManager() {
     [updateKey, isDarkMode]
   )
   return [isDarkMode, toggleDarkMode]
+}
+
+export function useLanguageModeManager() {
+  const [state, { updateKey }] = useLocalStorageContext()
+  let lang = state[LANGUAGE_KEY]
+  const toggleLanguage = useCallback(
+    (value) => {
+      localStorage.setItem(LANGUAGE_KEY, value)
+      state[LANGUAGE_KEY] = value
+    },
+    // [updateKey, lang]
+  )
+  return [lang, toggleLanguage]
 }
 
 export function usePathDismissed(path) {
