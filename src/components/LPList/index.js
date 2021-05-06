@@ -174,7 +174,7 @@ function LPList({ lps, disbaleLinks, maxItems = 10 }) {
         <div onClick={() => setPage(page === 1 ? page : page - 1)}>
           <Arrow faded={page === 1 ? true : false}>←</Arrow>
         </div>
-        <TYPE.body>{t('page') + ' ' + page + ' ' + t('of') + ' ' + maxPage}</TYPE.body>
+        <TYPE.body>{page + '/' + maxPage}</TYPE.body>
         <div onClick={() => setPage(page === maxPage ? page : page + 1)}>
           <Arrow faded={page === maxPage ? true : false}>→</Arrow>
         </div>

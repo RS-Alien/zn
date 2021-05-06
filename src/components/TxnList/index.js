@@ -447,7 +447,7 @@ function TxnList({ transactions, symbol0Override, symbol1Override, color }) {
         >
           <Arrow faded={page === 1 ? true : false}>←</Arrow>
         </div>
-        <TYPE.body>{t('page') + ' ' + page + ' ' + t('of') + ' ' + maxPage}</TYPE.body>
+        <TYPE.body>{page + '/' + maxPage}</TYPE.body>
         <div
           onClick={(e) => {
             setPage(page === maxPage ? page : page + 1)

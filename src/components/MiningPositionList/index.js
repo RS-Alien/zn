@@ -15,6 +15,7 @@ import { RowFixed } from '../Row'
 import { ButtonLight } from '../ButtonStyled'
 import { TYPE } from '../../Theme'
 import FormattedName from '../FormattedName'
+import { useTranslation } from 'react-i18next'
 
 dayjs.extend(utc)
 
@@ -107,6 +108,7 @@ const SORT_FIELD = {
 }
 
 function MiningPositionList({ miningPositions }) {
+  const { t } = useTranslation();
   // const below500 = useMedia('(max-width: 500px)')
   const below740 = useMedia('(max-width: 740px)')
 
@@ -251,7 +253,7 @@ function MiningPositionList({ miningPositions }) {
         <div onClick={() => setPage(page === 1 ? page : page - 1)}>
           <Arrow faded={page === 1}>←</Arrow>
         </div>
-        <TYPE.body>{'Page ' + page + ' of ' + maxPage}</TYPE.body>
+        <TYPE.body>{page + '/' + maxPage}</TYPE.body>
         <div onClick={() => setPage(page === maxPage ? page : page + 1)}>
           <Arrow faded={page === maxPage}>→</Arrow>
         </div>
