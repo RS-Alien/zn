@@ -1,4 +1,8 @@
-export const FACTORY_ADDRESS = '0x5d7a9e3FA7F5f7A525b3de91c2Bb0deF9eBC7A14'
+import {
+  FACTORY_ADDRESS as FACTORY_ADDRESS_SDK,
+  ChainId
+} from "@liuxingfeiyu/zoo-sdk"
+export const FACTORY_ADDRESS = FACTORY_ADDRESS_SDK[ChainId.OASISETH_TEST]
 
 export const BUNDLE_ID = '1'
 
@@ -44,8 +48,7 @@ export const PAIR_BLACKLIST = [
 
 // warnings to display if page contains info about blocked token
 export const BLOCKED_WARNINGS = {
-  '0xf4eda77f0b455a12f3eb44f8653835f377e36b76':
-    'TikTok Inc. has asserted this token is violating its trademarks and therefore is not available.',
+  '0xf4eda77f0b455a12f3eb44f8653835f377e36b76': 'TikTok Inc. has asserted this token is violating its trademarks and therefore is not available.',
 }
 
 /**
